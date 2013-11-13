@@ -9,6 +9,7 @@
 #import "DOCTasksViewController.h"
 #import "DOCTask.h"
 #import <AFNetworking/AFNetworking.h>
+#import "DOCTaskDetailViewController.h"
 
 @interface DOCTasksViewController ()
 
@@ -135,16 +136,21 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if ([[segue destinationViewController] isKindOfClass:[DOCTaskDetailViewController class]]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        DOCTask *task = self.tasks[indexPath.row];
+        ((DOCTaskDetailViewController *)[segue destinationViewController]).task = task;
+    }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
 
- */
+
 
 @end

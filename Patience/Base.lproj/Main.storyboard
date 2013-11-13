@@ -32,10 +32,10 @@
             </objects>
             <point key="canvasLocation" x="402" y="56"/>
         </scene>
-        <!--Task View Controller-->
+        <!--Task Detail View Controller-->
         <scene sceneID="dg1-LP-tb9">
             <objects>
-                <viewController id="PAA-uR-2l6" customClass="DOCTaskViewController" sceneMemberID="viewController">
+                <viewController id="PAA-uR-2l6" customClass="DOCTaskDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Z5M-6B-asX"/>
                         <viewControllerLayoutGuide type="bottom" id="ruN-7b-fRy"/>

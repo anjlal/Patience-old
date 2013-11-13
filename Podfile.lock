@@ -19,11 +19,14 @@ PODS:
   - AFNetworking/Serialization (2.0.2)
   - AFNetworking/UIKit (2.0.2):
     - AFNetworking/NSURLConnection
+  - TwilioSDK (1.1.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - TwilioSDK (~> 1.1.2)
 
 SPEC CHECKSUMS:
   AFNetworking: 22de50ae71ab1c4859773f61068d6fcd1d8f9a4d
+  TwilioSDK: 9f2397582ca2a83d5b5a9244dc1e8a438f776038
 
 COCOAPODS: 0.27.1
