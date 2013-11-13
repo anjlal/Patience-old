@@ -23,6 +23,7 @@
 		B354D0891831FF690025B2E2 /* PatienceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B354D0881831FF690025B2E2 /* PatienceTests.m */; };
 		B354D094183200050025B2E2 /* DOCTasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B354D093183200050025B2E2 /* DOCTasksViewController.m */; };
 		B354D0971832014E0025B2E2 /* DOCTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B354D0961832014E0025B2E2 /* DOCTask.m */; };
+		B354D09A1832E38B0025B2E2 /* DOCTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B354D0991832E38B0025B2E2 /* DOCTaskViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		B354D093183200050025B2E2 /* DOCTasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCTasksViewController.m; sourceTree = "<group>"; };
 		B354D0951832014E0025B2E2 /* DOCTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOCTask.h; sourceTree = "<group>"; };
 		B354D0961832014E0025B2E2 /* DOCTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCTask.m; sourceTree = "<group>"; };
+		B354D0981832E38B0025B2E2 /* DOCTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOCTaskViewController.h; sourceTree = "<group>"; };
+		B354D0991832E38B0025B2E2 /* DOCTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCTaskViewController.m; sourceTree = "<group>"; };
 		F15D2BC078D74C398F4FD8F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,6 +129,8 @@
 				B354D0951832014E0025B2E2 /* DOCTask.h */,
 				B354D0961832014E0025B2E2 /* DOCTask.m */,
 				B354D06F1831FF690025B2E2 /* Main.storyboard */,
+				B354D0981832E38B0025B2E2 /* DOCTaskViewController.h */,
+				B354D0991832E38B0025B2E2 /* DOCTaskViewController.m */,
 				B354D0751831FF690025B2E2 /* Images.xcassets */,
 				B354D0641831FF690025B2E2 /* Supporting Files */,
 				B354D092183200050025B2E2 /* DOCTasksViewController.h */,
@@ -298,6 +303,7 @@
 			files = (
 				B354D06A1831FF690025B2E2 /* main.m in Sources */,
 				B354D0971832014E0025B2E2 /* DOCTask.m in Sources */,
+				B354D09A1832E38B0025B2E2 /* DOCTaskViewController.m in Sources */,
 				B354D094183200050025B2E2 /* DOCTasksViewController.m in Sources */,
 				B354D06E1831FF690025B2E2 /* DOCAppDelegate.m in Sources */,
 			);
