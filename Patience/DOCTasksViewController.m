@@ -34,9 +34,9 @@
     [manager GET:@"http://localhost:5000/"
       parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             for (NSDictionary *dict in responseObject[@"patients"]) {
+             for (NSDictionary *dict in responseObject[@"tasks"]) {
                  NSLog(@"%@", dict);
-                 [_tasks addObject:[[DOCTask alloc] initWithId:[dict objectForKey:@"id"] name:[dict objectForKey:@"name"] issue:[dict objectForKey:@"description"]]];
+                 [_tasks addObject:[[DOCTask alloc] initWithJson:dict]];
              }
 
              /* Usually need to update the UI on the main thread, but for now let's not do this */
@@ -82,6 +82,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.textLabel.text = [(DOCTask *)self.tasks[indexPath.row] issue];
+    //cell.accessoryType = UITableViewCellAccessoryCheckmark;
     // Configure the cell...
     
     return cell;
@@ -94,6 +95,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  //  UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+ //   cell.accessoryType = UITableViewCellAccessoryCheckmark;
+
     [self performSegueWithIdentifier:@"DOCTaskDetailsSegue" sender:self];
 }
 

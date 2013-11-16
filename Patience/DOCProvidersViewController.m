@@ -1,22 +1,18 @@
 //
-//  DOCPatientViewController.m
+//  DOCProvidersViewController.m
 //  Patience
 //
-//  Created by Angie Lal on 11/13/13.
+//  Created by Angie Lal on 11/14/13.
 //  Copyright (c) 2013 Angie Lal. All rights reserved.
 //
 
-#import "DOCPatientViewController.h"
+#import "DOCProvidersViewController.h"
 
-@interface DOCPatientViewController ()
-
-@property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
-@property (weak, nonatomic) IBOutlet UIImageView *patientPhoto;
-@property (weak, nonatomic) IBOutlet UILabel *patientNameLabel;
+@interface DOCProvidersViewController ()
 
 @end
 
-@implementation DOCPatientViewController
+@implementation DOCProvidersViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -29,16 +25,9 @@
 
 - (void)viewDidLoad
 {
+    self.title = @"Providers";
     [super viewDidLoad];
 
-    //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
-    self.tableView.tableHeaderView = self.tableHeaderView;
-    if(!self.patientPhoto.image){
-        self.patientPhoto.image = [UIImage imageNamed:@"lego.jpg"];
-    }
-    self.patientNameLabel.text = self.patient.name;
-
-    //self.patientNameLabel.text = [ patientNameLabel.text];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -57,24 +46,49 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = @"Foo";
-    
+    if([self.checkedIndexPath isEqual:indexPath]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     return cell;
+}
+
+#pragma mark - Table view delegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(self.checkedIndexPath)
+    {
+        UITableViewCell* uncheckCell = [tableView
+                                        cellForRowAtIndexPath:self.checkedIndexPath];
+        uncheckCell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    if([self.checkedIndexPath isEqual:indexPath])
+    {
+        self.checkedIndexPath = nil;
+    }
+    else
+    {
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        self.checkedIndexPath = indexPath;
+    }
 }
 
 /*

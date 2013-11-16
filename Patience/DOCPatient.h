@@ -1,0 +1,19 @@
+//
+//  DOCPatient.h
+//  Patience
+//
+//  Created by Angie Lal on 11/14/13.
+//  Copyright (c) 2013 Angie Lal. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "DOCBaseModel.h"
+
+@interface DOCPatient : DOCBaseModel
+
+//@property (nonatomic, strong) NSNumber *pid;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSNumber *phoneNumber;
+@property (nonatomic, strong) NSNumber *age;
+
+@end

@@ -7,13 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DOCBaseModel.h"
+#import "DOCPatient.h"
 
-@interface DOCTask : NSObject
+@interface DOCTask : DOCBaseModel
 
-@property (nonatomic, strong) NSNumber *tid;
+//@property (nonatomic, strong) NSNumber *tid;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *issue;
+@property (nonatomic, strong) DOCPatient *patient;
+
 //@property (nonatomic, strong) NSDate *timestamp;
 
--(DOCTask *)initWithId:(NSNumber *)pid name:(NSString *)name issue:(NSString *)issue;
+-(DOCTask *)initWithJson:(NSDictionary *)json;
 @end

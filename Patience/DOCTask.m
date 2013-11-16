@@ -9,15 +9,29 @@
 #import "DOCTask.h"
 
 @implementation DOCTask
--(DOCTask *)initWithId:(NSNumber *)tid name:(NSString *)name issue:(NSString *)issue
+
+- (id)initWithJson:(NSDictionary *)json //see, we now inherit from base model and can override this method
 {
-    self = [super init];
+    self = [super initWithJson:json]; //gotta make sure we call the superclass constructor (i.e. DOCBaseModel)
     if (self) {
-        _tid = tid;
-        _name = name;
-        _issue = issue;
+        //_tid = json[@"id"];
+        //_name = json[@"name"];
+        _issue = json[@"description"];
+        _patient = [[DOCPatient alloc] initWithJson:json[@"patient"]];
     }
     return self;
 }
+
+/* can comment this out */
+//-(DOCTask *)initWithId:(NSNumber *)tid name:(NSString *)name issue:(NSString *)issue
+//{
+//    self = [super init];
+//    if (self) {
+//        _tid = tid;
+//        _name = name;
+//        _issue = issue;
+//    }
+//    return self;
+//}
 
 @end

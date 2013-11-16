@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DOCPatient.h"
+#import "DOCTask.h"
 
 @interface DOCPatientViewController : UITableViewController
-@property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
-@property (weak, nonatomic) IBOutlet UIImageView *patientPhoto;
-@property (weak, nonatomic) IBOutlet UILabel *patientNameLabel;
 
+@property (strong, nonatomic) DOCPatient *patient;
+@property (strong, nonatomic) DOCTask *task;
 @end
