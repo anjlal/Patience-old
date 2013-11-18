@@ -26,6 +26,11 @@
 		B354D09A1832E38B0025B2E2 /* DOCTaskDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B354D0991832E38B0025B2E2 /* DOCTaskDetailViewController.m */; };
 		B354D09C183337280025B2E2 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B354D09B183337280025B2E2 /* placeholder.jpg */; };
 		B354D09F18340E160025B2E2 /* DOCPatientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B354D09E18340E160025B2E2 /* DOCPatientViewController.m */; };
+		B354D0A21835888C0025B2E2 /* DOCProvidersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B354D0A11835888C0025B2E2 /* DOCProvidersViewController.m */; };
+		B354D0A418358ABC0025B2E2 /* lego.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B354D0A318358ABC0025B2E2 /* lego.jpg */; };
+		B354D0A71835B69D0025B2E2 /* DOCPatient.m in Sources */ = {isa = PBXBuildFile; fileRef = B354D0A61835B69D0025B2E2 /* DOCPatient.m */; };
+		B354D0AA1835B9340025B2E2 /* DOCBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B354D0A91835B9340025B2E2 /* DOCBaseModel.m */; };
+		B3A772E318395B960095D0B7 /* DOCProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A772E218395B960095D0B7 /* DOCProvider.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +71,15 @@
 		B354D09B183337280025B2E2 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		B354D09D18340E160025B2E2 /* DOCPatientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOCPatientViewController.h; sourceTree = "<group>"; };
 		B354D09E18340E160025B2E2 /* DOCPatientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCPatientViewController.m; sourceTree = "<group>"; };
+		B354D0A01835888C0025B2E2 /* DOCProvidersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOCProvidersViewController.h; sourceTree = "<group>"; };
+		B354D0A11835888C0025B2E2 /* DOCProvidersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCProvidersViewController.m; sourceTree = "<group>"; };
+		B354D0A318358ABC0025B2E2 /* lego.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lego.jpg; sourceTree = "<group>"; };
+		B354D0A51835B69D0025B2E2 /* DOCPatient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOCPatient.h; sourceTree = "<group>"; };
+		B354D0A61835B69D0025B2E2 /* DOCPatient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCPatient.m; sourceTree = "<group>"; };
+		B354D0A81835B9340025B2E2 /* DOCBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOCBaseModel.h; sourceTree = "<group>"; };
+		B354D0A91835B9340025B2E2 /* DOCBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCBaseModel.m; sourceTree = "<group>"; };
+		B3A772E118395B960095D0B7 /* DOCProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOCProvider.h; sourceTree = "<group>"; };
+		B3A772E218395B960095D0B7 /* DOCProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCProvider.m; sourceTree = "<group>"; };
 		F15D2BC078D74C398F4FD8F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,11 +152,20 @@
 				B354D0991832E38B0025B2E2 /* DOCTaskDetailViewController.m */,
 				B354D0751831FF690025B2E2 /* Images.xcassets */,
 				B354D09B183337280025B2E2 /* placeholder.jpg */,
+				B354D0A318358ABC0025B2E2 /* lego.jpg */,
 				B354D0641831FF690025B2E2 /* Supporting Files */,
 				B354D092183200050025B2E2 /* DOCTasksViewController.h */,
 				B354D093183200050025B2E2 /* DOCTasksViewController.m */,
 				B354D09D18340E160025B2E2 /* DOCPatientViewController.h */,
 				B354D09E18340E160025B2E2 /* DOCPatientViewController.m */,
+				B354D0A01835888C0025B2E2 /* DOCProvidersViewController.h */,
+				B354D0A11835888C0025B2E2 /* DOCProvidersViewController.m */,
+				B354D0A51835B69D0025B2E2 /* DOCPatient.h */,
+				B354D0A61835B69D0025B2E2 /* DOCPatient.m */,
+				B354D0A81835B9340025B2E2 /* DOCBaseModel.h */,
+				B354D0A91835B9340025B2E2 /* DOCBaseModel.m */,
+				B3A772E118395B960095D0B7 /* DOCProvider.h */,
+				B3A772E218395B960095D0B7 /* DOCProvider.m */,
 			);
 			path = Patience;
 			sourceTree = "<group>";
@@ -255,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B354D0A418358ABC0025B2E2 /* lego.jpg in Resources */,
 				B354D0761831FF690025B2E2 /* Images.xcassets in Resources */,
 				B354D09C183337280025B2E2 /* placeholder.jpg in Resources */,
 				B354D0681831FF690025B2E2 /* InfoPlist.strings in Resources */,
@@ -310,12 +334,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B354D0A21835888C0025B2E2 /* DOCProvidersViewController.m in Sources */,
 				B354D06A1831FF690025B2E2 /* main.m in Sources */,
+				B354D0A71835B69D0025B2E2 /* DOCPatient.m in Sources */,
+				B354D0AA1835B9340025B2E2 /* DOCBaseModel.m in Sources */,
 				B354D0971832014E0025B2E2 /* DOCTask.m in Sources */,
 				B354D09A1832E38B0025B2E2 /* DOCTaskDetailViewController.m in Sources */,
 				B354D09F18340E160025B2E2 /* DOCPatientViewController.m in Sources */,
 				B354D094183200050025B2E2 /* DOCTasksViewController.m in Sources */,
 				B354D06E1831FF690025B2E2 /* DOCAppDelegate.m in Sources */,
+				B3A772E318395B960095D0B7 /* DOCProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

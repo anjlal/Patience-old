@@ -7,9 +7,11 @@
 //
 
 #import "DOCProvidersViewController.h"
+#import <AFNetworking/AFNetworking.h>
+#import "DOCProvider.h"
 
 @interface DOCProvidersViewController ()
-
+@property (strong, nonatomic) NSMutableArray *providers;
 @end
 
 @implementation DOCProvidersViewController
@@ -27,6 +29,31 @@
 {
     self.title = @"Providers";
     [super viewDidLoad];
+
+    if (!self.providers) {
+        self.providers = [NSMutableArray array];
+    }
+
+    // Load Tasks
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://localhost:5000/providers"
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             for (NSDictionary *dict in responseObject[@"providers"]) {
+                 NSLog(@"%@", dict);
+                 [_providers addObject:[[DOCProvider alloc] initWithJson:dict]];
+             }
+
+             /* Usually need to update the UI on the main thread, but for now let's not do this */
+             //             dispatch_async(dispatch_get_main_queue(), ^{
+             //                 ;
+             //             });
+             [self.tableView reloadData];
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"This request failed: %@", error);
+         }];
+    
+
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -46,20 +73,25 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 0;
+    if (!self.providers || [self.providers count] == 0) {
+        return 0;
+    }
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 0;
+    return [self.providers count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    cell.textLabel.text = [(DOCProvider *)self.providers[indexPath.row] name];
+
+
     // Configure the cell...
     if([self.checkedIndexPath isEqual:indexPath]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -68,28 +100,51 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     return cell;
+
+    //cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    // Configure the cell...
+
+    return cell;
 }
 
 #pragma mark - Table view delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(self.checkedIndexPath)
-    {
-        UITableViewCell* uncheckCell = [tableView
-                                        cellForRowAtIndexPath:self.checkedIndexPath];
-        uncheckCell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    if([self.checkedIndexPath isEqual:indexPath])
-    {
-        self.checkedIndexPath = nil;
-    }
-    else
-    {
-        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        self.checkedIndexPath = indexPath;
+    UITableViewCell *thisCell = [tableView cellForRowAtIndexPath:indexPath];
+
+
+    if (thisCell.accessoryType == UITableViewCellAccessoryNone) {
+        thisCell.accessoryType = UITableViewCellAccessoryCheckmark;
+
+    }else{
+        thisCell.accessoryType = UITableViewCellAccessoryNone;
+
     }
 }
+
+- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath
+                                                                                                     *)indexPath {
+    
+    //add your own code to set the cell accesory type.
+    return UITableViewCellAccessoryNone;
+}
+//    if(self.checkedIndexPath)
+//    {
+//        UITableViewCell* uncheckCell = [tableView
+//                                        cellForRowAtIndexPath:self.checkedIndexPath];
+//        uncheckCell.accessoryType = UITableViewCellAccessoryNone;
+//    }
+//    if([self.checkedIndexPath isEqual:indexPath])
+//    {
+//        self.checkedIndexPath = nil;
+//    }
+//    else
+//    {
+//        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//        self.checkedIndexPath = indexPath;
+//    }
+//}
 
 /*
 // Override to support conditional editing of the table view.

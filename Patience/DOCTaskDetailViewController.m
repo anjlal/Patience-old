@@ -35,14 +35,22 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
-    if (theTextField == self.taskDescription) {
-        [theTextField resignFirstResponder];
+//- (BOOL)textViewShouldReturn:(UITextView *)theTextField {
+//    if (theTextField == self.taskDescription) {
+//        [theTextField resignFirstResponder];
+//    }
+//
+//    return YES;
+//}
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
     }
 
     return YES;
 }
-
 - (IBAction)willViewPatient:(UIButton *)patientNameButton
 {
     NSLog(@"Implement will view patient");

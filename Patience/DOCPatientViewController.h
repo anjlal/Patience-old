@@ -13,5 +13,5 @@
 @interface DOCPatientViewController : UITableViewController
 
 @property (strong, nonatomic) DOCPatient *patient;
-@property (strong, nonatomic) DOCTask *task;
+@property (strong, nonatomic) NSMutableArray *tasks;
 @end

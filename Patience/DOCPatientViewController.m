@@ -7,6 +7,7 @@
 //
 
 #import "DOCPatientViewController.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface DOCPatientViewController ()
 
@@ -38,6 +39,30 @@
     }
     self.patientNameLabel.text = self.patient.name;
 
+    if (!self.tasks) {
+        self.tasks = [NSMutableArray array];
+    }
+
+    // Load Tasks
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://localhost:5000/tasks/3"
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             for (NSDictionary *dict in responseObject[@"tasks"]) {
+                 NSLog(@"%@", dict);
+                 [_tasks addObject:[[DOCTask  alloc] initWithJson:dict]];
+             }
+
+             /* Usually need to update the UI on the main thread, but for now let's not do this */
+             //             dispatch_async(dispatch_get_main_queue(), ^{
+             //                 ;
+             //             });
+             [self.tableView reloadData];
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"This request failed: %@", error);
+         }];
+
+
     //self.patientNameLabel.text = [ patientNameLabel.text];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -63,16 +88,17 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    return [self.tasks count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    
+    cell.textLabel.text = [(DOCTask *)self.tasks[indexPath.row] issue];
+
     // Configure the cell...
-    cell.textLabel.text = @"Foo";
+    //cell.textLabel.text = @"Foo";
     
     return cell;
 }
