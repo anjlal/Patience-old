@@ -8,6 +8,8 @@
 
 #import "DOCPatientViewController.h"
 #import <AFNetworking/AFNetworking.h>
+#import "DOCTaskDetailViewController.h"
+
 
 @interface DOCPatientViewController ()
 
@@ -103,6 +105,15 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //  UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    //   cell.accessoryType = UITableViewCellAccessoryCheckmark;
+
+    [self performSegueWithIdentifier:@"DOCPatientToTaskDetailSegue" sender:self];
+}
+
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -142,16 +153,23 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if ([[segue destinationViewController] isKindOfClass:[DOCTaskDetailViewController class]]) {
+        //NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        NSLog(@"Cell: %@", [self.tableView indexPathForSelectedRow]);
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        DOCTask *task = self.tasks[indexPath.row];
+        ((DOCTaskDetailViewController *)[segue destinationViewController]).task = task;
+    }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
 
- */
+
 
 @end
