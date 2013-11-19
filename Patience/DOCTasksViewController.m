@@ -29,11 +29,24 @@
         self.tasks = [NSMutableArray array];
     }
 
+    [self loadTasks:nil];
+
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+ 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)loadTasks:(UIRefreshControl *)refreshControl
+{
     // Load Tasks
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://localhost:5000/"
       parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             // remove any tasks if there were any
+             [self.tasks removeAllObjects];
              for (NSDictionary *dict in responseObject[@"tasks"]) {
                  NSLog(@"%@", dict);
                  [_tasks addObject:[[DOCTask alloc] initWithJson:dict]];
@@ -44,21 +57,21 @@
              //                 ;
              //             });
              [self.tableView reloadData];
+             //refresh control could be nil
+             [refreshControl endRefreshing];
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"This request failed: %@", error);
          }];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning
+/* Very much like we do for buttons, we create an IBAction for our UIRefreshControl */
+//this could be any name, we will wire up in IB
+//the sender will always be a UIRefreshControl, since we control (via IB) when this method gets called
+//I can explain this more later in person
+- (IBAction)willRefresh:(UIRefreshControl *)refreshControl
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSLog(@"Will refresh tasks");
+    [self loadTasks:refreshControl];
 }
 
 #pragma mark - Table view data source

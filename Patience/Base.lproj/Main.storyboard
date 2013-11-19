@@ -24,8 +24,12 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="hLI-qO-qkI"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="amu-S5-hHW">
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="21c-uy-SoR">
                         <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle"/>
+                        <connections>
+                            <action selector="willRefresh:" destination="Kaj-wy-oJg" eventType="valueChanged" id="qw4-Ug-dB5"/>
+                        </connections>
                     </refreshControl>
                     <connections>
                         <segue destination="PAA-uR-2l6" kind="push" identifier="DOCTaskDetailsSegue" id="wbz-Qj-pok"/>
