@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *issue;
 @property (nonatomic, strong) DOCPatient *patient;
+@property (nonatomic, strong) NSNumber *providerId;
+
 
 //@property (nonatomic, strong) NSDate *timestamp;
 

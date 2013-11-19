@@ -18,6 +18,8 @@
         //_name = json[@"name"];
         _issue = json[@"description"];
         _patient = [[DOCPatient alloc] initWithJson:json[@"patient"]];
+        _providerId = json[@"providerId"];
+
     }
     return self;
 }
