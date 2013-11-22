@@ -23,7 +23,13 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="hLI-qO-qkI"/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="hLI-qO-qkI">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ptb-hW-LRq">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="Kaj-wy-oJg" id="bnM-hn-Cbd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="21c-uy-SoR">
                         <autoresizingMask key="autoresizingMask"/>
                         <attributedString key="attributedTitle"/>
@@ -173,16 +179,22 @@
                             <rect key="frame" x="0.0" y="64" width="320" height="117"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oe6-Vv-D86">
-                                    <rect key="frame" x="24" y="12" width="113" height="93"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Patient Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JN0-3z-N6P">
                                     <rect key="frame" x="159" y="48" width="104" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22s-VO-y8I">
+                                    <rect key="frame" x="34" y="20" width="78" height="77"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Patient Photo">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="presentPhotoPicker:" destination="KFz-c2-2AF" eventType="touchUpInside" id="Rgi-Xa-Rbs"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
@@ -207,7 +219,6 @@
                     <navigationItem key="navigationItem" id="xfm-zC-SA2"/>
                     <connections>
                         <outlet property="patientNameLabel" destination="JN0-3z-N6P" id="0lH-Ax-7lX"/>
-                        <outlet property="patientPhoto" destination="oe6-Vv-D86" id="ejK-YP-LE6"/>
                         <outlet property="tableHeaderView" destination="cPW-y3-B5R" id="0KC-80-3ab"/>
                     </connections>
                 </tableViewController>

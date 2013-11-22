@@ -72,6 +72,14 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+- (IBAction)presentPhotoPicker:(id)sender {
+    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
+
+}
 
 - (void)didReceiveMemoryWarning
 {
