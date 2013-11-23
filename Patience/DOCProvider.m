@@ -14,7 +14,8 @@
     self = [super initWithJson:json];
     if (self) {
         //set up patient properties here, like name and whatnot
-        _name = json[@"name"];
+        _email = json[@"email"];
+        _phoneNumber = json[@"phoneNumber"];
     }
     return self;
 }

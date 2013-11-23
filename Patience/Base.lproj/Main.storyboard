@@ -64,7 +64,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="WeO-qA-5eO" kind="push" id="gu7-f4-qhA"/>
+                                    <segue destination="3rb-Go-dzr" kind="modal" id="ScI-0N-nCW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjT-Vz-tP2">
@@ -161,11 +161,17 @@
                             <outlet property="delegate" destination="WeO-qA-5eO" id="nEJ-1a-wsW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="K3W-hF-t64"/>
+                    <navigationItem key="navigationItem" id="K3W-hF-t64">
+                        <barButtonItem key="rightBarButtonItem" title="Assign" id="bHh-al-10y">
+                            <connections>
+                                <action selector="willAssign:" destination="WeO-qA-5eO" id="3t0-Pe-3Xt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LdO-xQ-vfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="864" y="813"/>
+            <point key="canvasLocation" x="772" y="843"/>
         </scene>
         <!--Patient View Controller-->
         <scene sceneID="quo-Nu-R3p">
@@ -240,6 +246,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eTw-4U-mWl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-136" y="56"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1j1-wz-ks0">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="3rb-Go-dzr" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gey-3C-rDg">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="WeO-qA-5eO" kind="relationship" relationship="rootViewController" id="CGF-Lh-mXN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ojo-Gx-omJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="353" y="843"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

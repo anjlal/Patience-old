@@ -13,10 +13,19 @@
 @interface DOCTask : DOCBaseModel
 
 //@property (nonatomic, strong) NSNumber *tid;
-@property (nonatomic, strong) NSString *name;
+//@property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *issue;
 @property (nonatomic, strong) DOCPatient *patient;
 @property (nonatomic, strong) NSNumber *providerId;
+@property (nonatomic, strong) NSString *createdAt;
+@property (nonatomic, strong) NSString *updatedAt;
+@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSNumber *priority;
+
+
+
+
+
 
 
 //@property (nonatomic, strong) NSDate *timestamp;

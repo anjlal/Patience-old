@@ -19,6 +19,10 @@
         _issue = json[@"description"];
         _patient = [[DOCPatient alloc] initWithJson:json[@"patient"]];
         _providerId = json[@"providerId"];
+        _createdAt = json[@"createdAt"];
+        _updatedAt = json[@"updatedAt"];
+        _status = json[@"status"];
+        _priority = json[@"priority"];
 
     }
     return self;

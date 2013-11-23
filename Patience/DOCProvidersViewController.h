@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DOCProvidersViewController : UITableViewController
-@property (nonatomic, weak) NSIndexPath* checkedIndexPath;
+@property (nonatomic, strong) NSIndexPath* checkedIndexPath;
 @end

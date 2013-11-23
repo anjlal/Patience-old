@@ -42,7 +42,7 @@
 {
     // Load Tasks
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://localhost:5000/"
+    [manager GET:@"http://localhost:5000/tasks"
       parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              // remove any tasks if there were any

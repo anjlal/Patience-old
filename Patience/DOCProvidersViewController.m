@@ -16,19 +16,15 @@
 
 @implementation DOCProvidersViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
-    self.title = @"Providers";
     [super viewDidLoad];
+    self.title = @"Providers";
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(willCancel:)];
 
     if (!self.providers) {
         self.providers = [NSMutableArray array];
@@ -62,6 +58,21 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+#pragma mark - UIResponder (UIBarButtonItems)
+
+- (void)willCancel:(UIBarButtonItem *)cancelButton
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)willAssign:(UIBarButtonItem *)assignButton
+{
+    //do assignment here via POST
+    assignButton.enabled = NO;
+    //disable the assign button until server has responded - if failure, re-enable button
+    //if success dismiss like in willCancel above
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -89,7 +100,7 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = [(DOCProvider *)self.providers[indexPath.row] name];
+    cell.textLabel.text = [(DOCProvider *)self.providers[indexPath.row] email];
 
 
     // Configure the cell...
@@ -110,16 +121,21 @@
 #pragma mark - Table view delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *thisCell = [tableView cellForRowAtIndexPath:indexPath];
-
-
-    if (thisCell.accessoryType == UITableViewCellAccessoryNone) {
-        thisCell.accessoryType = UITableViewCellAccessoryCheckmark;
-
-    }else{
-        thisCell.accessoryType = UITableViewCellAccessoryNone;
-
+    // if we selected the same indexPath that was already selected, do nothing
+    if ([self.checkedIndexPath isEqual:indexPath]) {
+        return;
     }
+
+    // get the cells using the index paths
+    UITableViewCell *previouslySelectedCell = [tableView cellForRowAtIndexPath:self.checkedIndexPath];
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+
+    // uncheck previously checked and check the new cell
+    previouslySelectedCell.accessoryType = UITableViewCellAccessoryNone;
+    selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
+
+    // save the index path of the newly checked cell
+    self.checkedIndexPath = indexPath;
 }
 
 - (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath

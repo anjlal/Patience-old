@@ -142,7 +142,6 @@
 
     if ([[segue destinationViewController] isKindOfClass:[DOCPatientViewController class]]) {
 
-        NSLog(@"waaaa will view patient");
         // you pretty much got it here!
 
         /* Remember above, in the handler for the patient button being hit, i said iOS was

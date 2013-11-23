@@ -11,9 +11,10 @@
 
 @interface DOCPatient : DOCBaseModel
 
-//@property (nonatomic, strong) NSNumber *pid;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSNumber *phoneNumber;
-@property (nonatomic, strong) NSNumber *age;
+@property (nonatomic, strong) NSNumber *birthYear;
+@property (nonatomic, strong) NSString *photoFilename;
+
 
 @end

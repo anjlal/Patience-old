@@ -47,7 +47,7 @@
 
     // Load Tasks
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://localhost:5000/tasks/3"
+    [manager GET:[NSString stringWithFormat:@"http://localhost:5000/tasks/%d", [self.patient.objectId intValue]]
       parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              for (NSDictionary *dict in responseObject[@"tasks"]) {

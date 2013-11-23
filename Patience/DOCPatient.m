@@ -15,11 +15,10 @@
     self = [super initWithJson:json];
     if (self) {
         //set up patient properties here, like name and whatnot
-
-        //_pid = json[@"id"];
         _name = json[@"name"];
         _phoneNumber = json[@"phoneNumber"];
-        _age = json[@"age"];
+        _birthYear = json[@"birthYear"];
+        _photoFilename = json[@"photoFilename"];
     }
     return self;
 }
