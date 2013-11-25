@@ -26,7 +26,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="hLI-qO-qkI">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ptb-hW-LRq">
                             <connections>
-                                <action selector="addButtonPressed:" destination="Kaj-wy-oJg" id="bnM-hn-Cbd"/>
+                                <action selector="addButtonPressed:" destination="Kaj-wy-oJg" id="gsh-Hv-SZc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -110,7 +110,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNa-CH-ReD">
-                                <rect key="frame" x="141" y="103" width="93" height="30"/>
+                                <rect key="frame" x="141" y="103" width="159" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Patient Name">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -186,7 +186,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Patient Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JN0-3z-N6P">
-                                    <rect key="frame" x="159" y="48" width="104" height="21"/>
+                                    <rect key="frame" x="159" y="48" width="148" height="20"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="highlightedColor"/>

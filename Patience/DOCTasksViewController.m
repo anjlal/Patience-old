@@ -153,9 +153,37 @@
 }
 */
 
+#pragma mark - Delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //Get the name of the current pressed button
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if ([buttonTitle isEqualToString:@"Task"]) {
+        NSLog(@"Other 1 pressed");
+    }
+    if ([buttonTitle isEqualToString:@"Patient"]) {
+        NSLog(@"Other 2 pressed");
+    }
+    if ([buttonTitle isEqualToString:@"Cancel"]) {
+        NSLog(@"Cancel pressed --> Cancel ActionSheet");
+    }
+
+}
 
 #pragma mark - Navigation
 - (IBAction)addButtonPressed:(UIBarButtonItem *)sender {
+    NSString *actionSheetTitle = @"Add New:"; //Action Sheet Title
+    //NSString *destructiveTitle = @"Delete Task"; //Action Sheet Button Titles
+    NSString *other1 = @"Task";
+    NSString *other2 = @"Patient";
+    NSString *cancelTitle = @"Cancel";
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:actionSheetTitle
+                                  delegate:self
+                                  cancelButtonTitle:cancelTitle
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:other1, other2, nil];
+    [actionSheet showInView:self.view];
+    
 }
 
 // In a story board-based application, you will often want to do a little preparation before navigation

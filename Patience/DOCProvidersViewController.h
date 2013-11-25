@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DOCProvider.h"
 
 @interface DOCProvidersViewController : UITableViewController
 @property (nonatomic, strong) NSIndexPath* checkedIndexPath;
+@property (nonatomic, strong) DOCProvider *provider;
 @end

@@ -9,6 +9,7 @@
 #import "DOCPatientViewController.h"
 #import <AFNetworking/AFNetworking.h>
 #import "DOCTaskDetailViewController.h"
+#import "DOCProvider.h"
 
 
 @interface DOCPatientViewController ()
@@ -169,7 +170,7 @@
 {
     if ([[segue destinationViewController] isKindOfClass:[DOCTaskDetailViewController class]]) {
         //NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        NSLog(@"Cell: %@", [self.tableView indexPathForSelectedRow]);
+        //NSLog(@"Cell: %@", [self.tableView indexPathForSelectedRow]);
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         DOCTask *task = self.tasks[indexPath.row];
         ((DOCTaskDetailViewController *)[segue destinationViewController]).task = task;

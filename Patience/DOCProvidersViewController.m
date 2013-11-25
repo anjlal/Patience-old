@@ -8,7 +8,7 @@
 
 #import "DOCProvidersViewController.h"
 #import <AFNetworking/AFNetworking.h>
-#import "DOCProvider.h"
+#import "DOCTask.h"
 
 @interface DOCProvidersViewController ()
 @property (strong, nonatomic) NSMutableArray *providers;
@@ -102,7 +102,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.textLabel.text = [(DOCProvider *)self.providers[indexPath.row] email];
 
-
     // Configure the cell...
     if([self.checkedIndexPath isEqual:indexPath]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -114,8 +113,6 @@
 
     //cell.accessoryType = UITableViewCellAccessoryCheckmark;
     // Configure the cell...
-
-    return cell;
 }
 
 #pragma mark - Table view delegate

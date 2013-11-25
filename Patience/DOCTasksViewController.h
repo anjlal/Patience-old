@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DOCTasksViewController : UITableViewController
+@interface DOCTasksViewController : UITableViewController <UIActionSheetDelegate>
 
 @end
