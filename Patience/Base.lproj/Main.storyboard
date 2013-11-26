@@ -4,6 +4,55 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
+        <!--Table View Controller - Root View Controller-->
+        <scene sceneID="AO3-E6-lK4">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hhL-23-HET" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="OMt-lv-dQP" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wEq-jl-OM9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="qTf-k7-oa1">
+                        <barButtonItem key="leftBarButtonItem" style="done" id="qqG-fO-K5F">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FnO-2R-HfK">
+                                <rect key="frame" x="16" y="7" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="bcv-j3-AJ7">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jOB-TU-Gu3">
+                                <rect key="frame" x="270" y="7" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="428" y="-877"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="d8j-UH-OEw">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="VOA-AT-HgI" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oow-RB-85V">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="OMt-lv-dQP" kind="relationship" relationship="rootViewController" id="c9y-d1-1xU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0jZ-bt-qJk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-104" y="-877"/>
+        </scene>
         <!--Tasks View Controller - Root View Controller-->
         <scene sceneID="qIv-Lr-5ZF">
             <objects>
@@ -39,6 +88,7 @@
                     </refreshControl>
                     <connections>
                         <segue destination="PAA-uR-2l6" kind="push" identifier="DOCTaskDetailsSegue" id="wbz-Qj-pok"/>
+                        <segue destination="OMt-lv-dQP" kind="modal" identifier="DOCTaskNewTaskSegue" id="VmU-Rb-XAs"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KCv-nX-2Dj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -269,6 +319,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="VmU-Rb-XAs"/>
         <segue reference="wbz-Qj-pok"/>
     </inferredMetricsTieBreakers>
 </document>

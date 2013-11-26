@@ -101,6 +101,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.textLabel.text = [(DOCProvider *)self.providers[indexPath.row] email];
+    NSNumber *cellValue = [(DOCProvider *)self.providers[indexPath.row] objectId];
 
     // Configure the cell...
     if([self.checkedIndexPath isEqual:indexPath]) {
@@ -108,7 +109,15 @@
     }
     else {
         cell.accessoryType = UITableViewCellAccessoryNone;
+
+        if (self.checkedIndexPath == nil && [cellValue isEqual:[NSNumber numberWithInt:3]]) {
+            self.checkedIndexPath = indexPath;
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+
+        }
     }
+
+
     return cell;
 
     //cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -135,12 +144,11 @@
     self.checkedIndexPath = indexPath;
 }
 
-- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath
-                                                                                                     *)indexPath {
-    
-    //add your own code to set the cell accesory type.
-    return UITableViewCellAccessoryNone;
-}
+//- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath
+//                                                                                                     *)indexPath {
+//    //add your own code to set the cell accesory type.
+//    return UITableViewCellAccessoryNone;
+//}
 //    if(self.checkedIndexPath)
 //    {
 //        UITableViewCell* uncheckCell = [tableView

@@ -158,7 +158,7 @@
     //Get the name of the current pressed button
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     if ([buttonTitle isEqualToString:@"Task"]) {
-        NSLog(@"Other 1 pressed");
+        [self performSegueWithIdentifier:@"DOCTaskNewTaskSegue" sender:self];
     }
     if ([buttonTitle isEqualToString:@"Patient"]) {
         NSLog(@"Other 2 pressed");
