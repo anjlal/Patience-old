@@ -142,6 +142,8 @@
      anyway, in case you add more. */
 
     UIViewController *destinationVC = [segue destinationViewController];
+
+    NSLog(@"destination class: %@", [destinationVC class]);
     if ([destinationVC isKindOfClass:[DOCPatientViewController class]]) {
 
         // you pretty much got it here!
@@ -158,9 +160,15 @@
 //        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 //        DOCTask *task = self.tasks[indexPath.row];
 //        ((DOCTaskDetailViewController *)[segue destinationViewController]).task = task;
-    } else if ([destinationVC isKindOfClass:[DOCProvidersViewController class]]) {
-        [(DOCProvidersViewController *)destinationVC setTask:self.task];
-        [(DOCProvidersViewController *)destinationVC setDelegate:self];
+    }
+    else if ([destinationVC isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *wrapperVC = (UINavigationController *)destinationVC;
+
+        if ([wrapperVC.topViewController isKindOfClass:[DOCProvidersViewController class]]) {
+            [(DOCProvidersViewController *)wrapperVC.topViewController setTask:self.task];
+            [(DOCProvidersViewController *)wrapperVC.topViewController setDelegate:self];
+        }
+
     }
 
     // Get the new view controller using [segue destinationViewController].

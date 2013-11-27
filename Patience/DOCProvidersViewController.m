@@ -119,6 +119,14 @@
     DOCProvider *provider = self.providers[indexPath.row];
     cell.textLabel.text = provider.email;
 
+    // looks like i lied and the default accessory is a chevron? weird. this can't be true...
+    // but let's just be explicit
+    // SH is a laggy piece of shite
+
+    //set default accessory type
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    //if this provider is the currently assigned provider, change accessory type
     if ([provider.objectId isEqualToNumber:self.task.providerId]) {
         self.checkedIndexPath = indexPath;
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

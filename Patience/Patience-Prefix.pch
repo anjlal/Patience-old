@@ -12,9 +12,12 @@
 
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
+    #import <Foundation/Foundation.h>/Users/angielal/HBProject/Patience/Patience/Patience-Prefix.pch
     #import <MBProgressHUD/MBProgressHUD.h>
 
+//Angie home wifi
+//#define API_URL(s) [@"http://192.168.1.87:5000" stringByAppendingPathComponent:s]
+// localhost
 #define API_URL(s) [@"http://localhost:5000" stringByAppendingPathComponent:s]
 
 //MB PROGRESS HUD

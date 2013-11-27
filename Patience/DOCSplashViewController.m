@@ -111,7 +111,14 @@
 - (void)moveKeyboard:(NSNotification*)notification
 {
     NSValue *value = notification.userInfo [UIKeyboardFrameBeginUserInfoKey];
-    
+    CGRect frame;
+    [value getValue:&frame];
+
+//    [UIView animateWithDuration:duration delay:0 options:(curve << 16) animations:^{
+//        CGRect frame = textField.frame;
+//        frame.origin.y -= 50;
+//        textField.frame = frame;
+//    } completion:nil]
 }
 # pragma mark - UITextFieldDelegate
 
