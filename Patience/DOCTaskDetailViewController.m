@@ -8,8 +8,9 @@
 
 #import "DOCTaskDetailViewController.h"
 #import "DOCPatientViewController.h"
+#import "DOCProvidersViewController.h"
 
-@interface DOCTaskDetailViewController ()
+@interface DOCTaskDetailViewController () <DOCProvidersViewControllerDelegate>
 
 @end
 
@@ -140,7 +141,8 @@
      to. In this case, there is currently only one segue, to the Patient VC. We'll still check
      anyway, in case you add more. */
 
-    if ([[segue destinationViewController] isKindOfClass:[DOCPatientViewController class]]) {
+    UIViewController *destinationVC = [segue destinationViewController];
+    if ([destinationVC isKindOfClass:[DOCPatientViewController class]]) {
 
         // you pretty much got it here!
 
@@ -151,16 +153,27 @@
          segued yet. The segue will be that "push" (horizontal slide) animation. We're in _prepare_ for segue. So it hasn't happened yet. Hence, in-between phase. In between instantiation => push. The thing we were doing manually above in  THE OLD WAY. And in THE OLD WAY, what were we doing in between? If you look at the code, we were instantiating => setting the patient property => pushing. So since iOS is now taking care of (1) and (3) automatically. We need to still do (2). And we do it here. */
 
         /* This is where we set the patient property. We do the cast (DOCPatientViewController *) because the compiler will complain that it doesn't know about a patient property otherwise. Remember, I said above that this method gets called by iOS when ANY segue is happening from this VC. So the destination VC could be something other than Patient VC (hence why we check above in the if statement). But we still need to tell the compiler that this is a Patient VC, so it knows that setting the patient property is OK. */
-        [(DOCPatientViewController *)[segue destinationViewController] setPatient:self.task.patient];
+        [(DOCPatientViewController *)destinationVC setPatient:self.task.patient];
 
 //        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 //        DOCTask *task = self.tasks[indexPath.row];
 //        ((DOCTaskDetailViewController *)[segue destinationViewController]).task = task;
+    } else if ([destinationVC isKindOfClass:[DOCProvidersViewController class]]) {
+        [(DOCProvidersViewController *)destinationVC setTask:self.task];
+        [(DOCProvidersViewController *)destinationVC setDelegate:self];
     }
 
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
 
+#pragma mark - DOCProvidersViewControllerDelegate
+
+- (void)didReassignTask:(DOCTask *)task toProvider:(DOCProvider *)provider
+{
+    //if we came from the patient view, can only reassign a task that was owned by currently logged in provider
+    //if reassigned to the currently logged in provider, i.e. not reassigned at all, don't remove task
+    //else pop this view controller and remove task from list
+}
 
 @end

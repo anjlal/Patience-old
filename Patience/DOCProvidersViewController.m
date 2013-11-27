@@ -11,6 +11,7 @@
 #import "DOCTask.h"
 
 @interface DOCProvidersViewController ()
+@property (nonatomic, strong) NSIndexPath* checkedIndexPath;
 @property (strong, nonatomic) NSMutableArray *providers;
 @end
 
@@ -32,7 +33,7 @@
 
     // Load Tasks
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://localhost:5000/providers"
+    [manager GET:API_URL(@"/providers")
       parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              for (NSDictionary *dict in responseObject[@"providers"]) {
@@ -69,6 +70,20 @@
 {
     //do assignment here via POST
     assignButton.enabled = NO;
+    DOCProvider *provider = self.providers[self.checkedIndexPath.row];
+    NSString *postUrlString = [NSString stringWithFormat:@"/tasks/%d/reassign", [self.task.objectId intValue]];
+    [[AFHTTPRequestOperationManager manager] POST:API_URL(postUrlString)
+                                       parameters:@{ @"providerId" : provider.objectId }
+                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                              if (self.delegate && [self.delegate respondsToSelector:@selector(didReassignTask:toProvider:)]) {
+                                                  [self.delegate didReassignTask:self.task toProvider:provider];
+                                              }
+                                              [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                              assignButton.enabled = YES;
+                                              NSLog(@"FAILED TO REASSIGN TASK");
+                                          }];
+    
     //disable the assign button until server has responded - if failure, re-enable button
     //if success dismiss like in willCancel above
 }
@@ -100,23 +115,14 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = [(DOCProvider *)self.providers[indexPath.row] email];
-    NSNumber *cellValue = [(DOCProvider *)self.providers[indexPath.row] objectId];
 
-    // Configure the cell...
-    if([self.checkedIndexPath isEqual:indexPath]) {
+    DOCProvider *provider = self.providers[indexPath.row];
+    cell.textLabel.text = provider.email;
+
+    if ([provider.objectId isEqualToNumber:self.task.providerId]) {
+        self.checkedIndexPath = indexPath;
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
-    else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-
-        if (self.checkedIndexPath == nil && [cellValue isEqual:[NSNumber numberWithInt:3]]) {
-            self.checkedIndexPath = indexPath;
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-
-        }
-    }
-
 
     return cell;
 

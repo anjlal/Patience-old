@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "DOCProvider.h"
+#import "DOCTask.h"
+
+@protocol DOCProvidersViewControllerDelegate <NSObject>
+
+@optional
+- (void)didReassignTask:(DOCTask *)task toProvider:(DOCProvider *)provider;
+
+@end
 
 @interface DOCProvidersViewController : UITableViewController
-@property (nonatomic, strong) NSIndexPath* checkedIndexPath;
-@property (nonatomic, strong) DOCProvider *provider;
+
+@property (nonatomic, weak) id<DOCProvidersViewControllerDelegate> delegate;
+@property (nonatomic, strong) DOCTask *task;
+
 @end

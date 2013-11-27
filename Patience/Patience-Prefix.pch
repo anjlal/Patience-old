@@ -13,4 +13,42 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <MBProgressHUD/MBProgressHUD.h>
+
+#define API_URL(s) [@"http://localhost:5000" stringByAppendingPathComponent:s]
+
+//MB PROGRESS HUD
+static void HUDWithErrorInView(UIView *view, NSString *message) {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = message;
+    hud.minShowTime = 1.0f;
+    [MBProgressHUD hideHUDForView:view animated:YES];
+}
+
+static void HUDWithErrorMessageInView(UIView *view, NSString *message) {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.detailsLabelText = message;
+    hud.minShowTime = 3.0f;
+    [MBProgressHUD hideHUDForView:view animated:YES];
+}
+
+static MBProgressHUD* HUDWithMessageInView(UIView *view, NSString *message) {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = message;
+    return hud;
+}
+
+static MBProgressHUD* HUDWithIndicatorInView(UIView *view) {
+    MBProgressHUD *existingHUD = [MBProgressHUD HUDForView:view];
+    if (existingHUD) {
+        return existingHUD;
+    }
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    return hud;
+}
+
 #endif

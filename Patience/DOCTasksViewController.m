@@ -11,6 +11,11 @@
 #import <AFNetworking/AFNetworking.h>
 #import "DOCTaskDetailViewController.h"
 
+typedef enum {
+    DOCNewItemTaskButton = 0,
+    DOCNewItemPatientButton
+} DOCNewItemActionSheetButtons;
+
 @interface DOCTasksViewController ()
 
 @property (strong, nonatomic) NSMutableArray *tasks;
@@ -23,6 +28,9 @@
 {
     [super viewDidLoad];
     self.title = @"Tasks";
+    [self.navigationController setNavigationBarHidden:NO];
+    self.navigationItem.hidesBackButton = YES;
+
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
 
     if (!self.tasks) {
@@ -156,32 +164,27 @@
 #pragma mark - Delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     //Get the name of the current pressed button
-    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-    if ([buttonTitle isEqualToString:@"Task"]) {
-        [self performSegueWithIdentifier:@"DOCTaskNewTaskSegue" sender:self];
+//    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    switch (buttonIndex) {
+        case DOCNewItemTaskButton:
+            [self performSegueWithIdentifier:@"DOCTaskNewTaskSegue" sender:self];
+            break;
+        case DOCNewItemPatientButton:
+            [self performSegueWithIdentifier:@"DOCTaskNewPatientSegue" sender:self];
+            break;
+        default:
+            break;
     }
-    if ([buttonTitle isEqualToString:@"Patient"]) {
-        NSLog(@"Other 2 pressed");
-    }
-    if ([buttonTitle isEqualToString:@"Cancel"]) {
-        NSLog(@"Cancel pressed --> Cancel ActionSheet");
-    }
-
 }
 
 #pragma mark - Navigation
 - (IBAction)addButtonPressed:(UIBarButtonItem *)sender {
-    NSString *actionSheetTitle = @"Add New:"; //Action Sheet Title
-    //NSString *destructiveTitle = @"Delete Task"; //Action Sheet Button Titles
-    NSString *other1 = @"Task";
-    NSString *other2 = @"Patient";
-    NSString *cancelTitle = @"Cancel";
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle:actionSheetTitle
+                                  initWithTitle:@"Add New:"
                                   delegate:self
-                                  cancelButtonTitle:cancelTitle
+                                  cancelButtonTitle:@"Cancel"
                                   destructiveButtonTitle:nil
-                                  otherButtonTitles:other1, other2, nil];
+                                  otherButtonTitles:@"Task", @"Patient", nil];
     [actionSheet showInView:self.view];
     
 }
