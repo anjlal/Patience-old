@@ -24,7 +24,7 @@
     self.taskDescription.text = self.task.issue;
 
     if(!self.patientPhoto.image){
-        self.patientPhoto.image = [UIImage imageNamed:@"lego.jpg"];
+        self.patientPhoto.image = [UIImage imageNamed: self.task.patient.photoFilename];
     }
 
     //NSLog(@"The task: %@, %i", self.task, arc4random());

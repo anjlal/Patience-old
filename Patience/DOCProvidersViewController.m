@@ -70,9 +70,11 @@
 {
     //do assignment here via POST
     assignButton.enabled = NO;
+    //DOCProvider *provider = self.providers[self.checkedIndexPath.row];
     DOCProvider *provider = self.providers[self.checkedIndexPath.row];
     NSString *postUrlString = [NSString stringWithFormat:@"/tasks/%d/reassign", [self.task.objectId intValue]];
-    [[AFHTTPRequestOperationManager manager] POST:API_URL(postUrlString)
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                                    [manager POST:API_URL(postUrlString)
                                        parameters:@{ @"providerId" : provider.objectId }
                                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                               if (self.delegate && [self.delegate respondsToSelector:@selector(didReassignTask:toProvider:)]) {
@@ -81,7 +83,7 @@
                                               [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                                           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                               assignButton.enabled = YES;
-                                              NSLog(@"FAILED TO REASSIGN TASK");
+                                              NSLog(@"FAILED TO REASSIGN TASK: %@", error);
                                           }];
     
     //disable the assign button until server has responded - if failure, re-enable button

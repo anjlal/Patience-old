@@ -200,7 +200,7 @@
                     <navigationItem key="navigationItem" id="K3W-hF-t64">
                         <barButtonItem key="rightBarButtonItem" title="Assign" id="bHh-al-10y">
                             <connections>
-                                <action selector="willAssign:" destination="WeO-qA-5eO" id="3t0-Pe-3Xt"/>
+                                <action selector="willAssign:" destination="WeO-qA-5eO" id="xwf-SQ-1LO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
