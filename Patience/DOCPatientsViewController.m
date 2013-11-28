@@ -1,59 +1,54 @@
 //
-//  DOCPatientViewController.m
+//  DOCPatientsViewController.m
 //  Patience
 //
-//  Created by Angie Lal on 11/13/13.
+//  Created by Angie Lal on 11/27/13.
 //  Copyright (c) 2013 Angie Lal. All rights reserved.
 //
 
-#import "DOCPatientViewController.h"
+#import "DOCPatientsViewController.h"
+#import "DOCPatient.h"
 #import <AFNetworking/AFNetworking.h>
-#import "DOCTaskDetailViewController.h"
-#import "DOCProvider.h"
 
+@interface DOCPatientsViewController ()
 
-@interface DOCPatientViewController ()
-
-@property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
-@property (weak, nonatomic) IBOutlet UIImageView *patientPhoto;
-@property (weak, nonatomic) IBOutlet UILabel *patientNameLabel;
+@property (strong, nonatomic) NSMutableArray *patients;
 
 @end
 
-@implementation DOCPatientViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@implementation DOCPatientsViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"Patients";
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
 
-    //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
-    self.tableView.tableHeaderView = self.tableHeaderView;
-    if(!self.patientPhoto.image){
-        self.patientPhoto.image = [UIImage imageNamed:@"lego.jpg"];
-    }
-    self.patientNameLabel.text = self.patient.name;
-
-    if (!self.tasks) {
-        self.tasks = [NSMutableArray array];
+    if (!self.patients) {
+        self.patients = [NSMutableArray array];
     }
 
+    [self loadPatients];
+
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+ 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)loadPatients
+{
     // Load Tasks
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[NSString stringWithFormat:@"http://localhost:5000/tasks/%d", [self.patient.objectId intValue]]
+    [manager GET:API_URL(@"/patients")
       parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             for (NSDictionary *dict in responseObject[@"tasks"]) {
+             // remove any tasks if there were any
+             [self.patients removeAllObjects];
+             for (NSDictionary *dict in responseObject[@"patients"]) {
                  NSLog(@"%@", dict);
-                 [_tasks addObject:[[DOCTask  alloc] initWithJson:dict]];
+                 [_patients addObject:[[DOCPatient alloc] initWithJson:dict]];
              }
 
              /* Usually need to update the UI on the main thread, but for now let's not do this */
@@ -64,28 +59,6 @@
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"This request failed: %@", error);
          }];
-
-
-    //self.patientNameLabel.text = [ patientNameLabel.text];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-- (IBAction)presentPhotoPicker:(id)sender {
-    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self presentViewController:picker animated:YES completion:NULL];
-    }
-
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -93,24 +66,26 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
+    // Return the number of sections.
+    if (!self.patients || [self.patients count] == 0) {
+        return 0;
+    }
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.tasks count];
+    return [self.patients count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.textLabel.text = [(DOCTask *)self.tasks[indexPath.row] issue];
-
+    cell.textLabel.text = [(DOCPatient *)self.patients[indexPath.row] name];
+    //cell.accessoryType = UITableViewCellAccessoryCheckmark;
     // Configure the cell...
-    //cell.textLabel.text = @"Foo";
-    
+
     return cell;
 }
 
@@ -119,9 +94,12 @@
     //  UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     //   cell.accessoryType = UITableViewCellAccessoryCheckmark;
 
-    [self performSegueWithIdentifier:@"DOCPatientToTaskDetailSegue" sender:self];
+    DOCPatient *selectedPatient = self.patients[indexPath.row];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectPatient:)]) {
+        [self.delegate didSelectPatient:selectedPatient];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 /*
 // Override to support conditional editing of the table view.
@@ -162,30 +140,16 @@
 }
 */
 
--(void) setupAppearance
-{
-
-    UIBarButtonItem *cameraBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePicture:)];
-
-    [[self navigationItem] setRightBarButtonItem:cameraBarButtonItem];
-}
-
+/*
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue destinationViewController] isKindOfClass:[DOCTaskDetailViewController class]]) {
-        //NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        //NSLog(@"Cell: %@", [self.tableView indexPathForSelectedRow]);
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        DOCTask *task = self.tasks[indexPath.row];
-        ((DOCTaskDetailViewController *)[segue destinationViewController]).task = task;
-    }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
 
-
+ */
 
 @end

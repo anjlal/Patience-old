@@ -19,6 +19,8 @@
 //#define API_URL(s) [@"http://192.168.1.87:5000" stringByAppendingPathComponent:s]
 // localhost
 #define API_URL(s) [@"http://localhost:5000" stringByAppendingPathComponent:s]
+//hb
+//#define API_URLS(s) [@"http://10.1.10.30:5000" stringByAppendingPathComponents:s]
 
 //MB PROGRESS HUD
 static void HUDWithErrorInView(UIView *view, NSString *message) {

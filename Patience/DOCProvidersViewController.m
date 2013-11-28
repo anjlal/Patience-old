@@ -70,8 +70,13 @@
 {
     //do assignment here via POST
     assignButton.enabled = NO;
-    //DOCProvider *provider = self.providers[self.checkedIndexPath.row];
     DOCProvider *provider = self.providers[self.checkedIndexPath.row];
+
+    if ([self.task.providerId isEqual:provider.objectId]) {
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
+
     NSString *postUrlString = [NSString stringWithFormat:@"/tasks/%d/reassign", [self.task.objectId intValue]];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                                     [manager POST:API_URL(postUrlString)

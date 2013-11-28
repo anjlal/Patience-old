@@ -8,6 +8,8 @@
 
 #import "DOCTasksViewController.h"
 #import "DOCTask.h"
+#import "DOCProvider.h"
+#import "DOCAccount.h"
 #import <AFNetworking/AFNetworking.h>
 #import "DOCTaskDetailViewController.h"
 
@@ -39,6 +41,19 @@ typedef enum {
 
     [self loadTasks:nil];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReassignTask:)
+                                                 name:@"ProviderDidReassignTaskNotification"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didCompleteTask:)
+                                                 name:@"ProviderDidCompleteTaskNotification"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didCreateTask:)
+                                                 name:@"ProviderDidCreateTaskNotification"
+                                               object:nil];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -50,8 +65,8 @@ typedef enum {
 {
     // Load Tasks
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://localhost:5000/tasks"
-      parameters:nil
+    [manager GET:API_URL(@"/tasks")
+      parameters:@{ @"provider_id": [[[DOCAccount account] currentProvider] objectId] }
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              // remove any tasks if there were any
              [self.tasks removeAllObjects];
@@ -80,6 +95,19 @@ typedef enum {
 {
     NSLog(@"Will refresh tasks");
     [self loadTasks:refreshControl];
+}
+
+- (NSInteger)indexForTask:(DOCTask *)task
+{
+    NSUInteger count = [self.tasks count];
+    NSInteger taskIndex = -1;
+    for (int i = 0; i < count; i++) {
+        if ([[(DOCTask *)self.tasks[i] objectId] isEqual:task.objectId]) {
+            taskIndex = i;
+            break;
+        }
+    }
+    return taskIndex;
 }
 
 #pragma mark - Table view data source
@@ -201,6 +229,45 @@ typedef enum {
     // Pass the selected object to the new view controller.
 }
 
+#pragma mark - NSNotification
+
+/* These look identical, and they are, but we might do something different down the road
+   based on what action was taken. So leaving the code duplication for now. */
+
+- (void)didReassignTask:(NSNotification *)notification
+{
+    NSDictionary *notificationInfo = [notification userInfo];
+    DOCTask *task = notificationInfo[@"task"];
+    NSInteger taskIndex = [self indexForTask:task];
+    if (taskIndex != -1) {
+        [self.tasks removeObjectAtIndex:taskIndex];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }
+}
+
+- (void)didCompleteTask:(NSNotification *)notification
+{
+    NSDictionary *notificationInfo = [notification userInfo];
+    DOCTask *task = notificationInfo[@"task"];
+    NSInteger taskIndex = [self indexForTask:task];
+    if (taskIndex != -1) {
+        [self.tasks removeObjectAtIndex:taskIndex];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }
+}
+
+- (void)didCreateTask:(NSNotification *)notification
+{
+    DOCTask *task = [notification userInfo][@"task"];
+    [self.tasks insertObject:task atIndex:0];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
 
 
 @end

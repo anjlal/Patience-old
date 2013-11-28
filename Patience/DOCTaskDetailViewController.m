@@ -9,6 +9,8 @@
 #import "DOCTaskDetailViewController.h"
 #import "DOCPatientViewController.h"
 #import "DOCProvidersViewController.h"
+#import <AFNetworking/AFNetworking.h>
+
 
 @interface DOCTaskDetailViewController () <DOCProvidersViewControllerDelegate>
 
@@ -25,6 +27,10 @@
 
     if(!self.patientPhoto.image){
         self.patientPhoto.image = [UIImage imageNamed: self.task.patient.photoFilename];
+    }
+
+    if ([self.task.status isEqualToString:@"CLOSED"]) {
+        self.completed.enabled = NO;
     }
 
     //NSLog(@"The task: %@, %i", self.task, arc4random());
@@ -51,6 +57,25 @@
     }
 
     return YES;
+}
+- (IBAction)willChangeStatus:(UIButton *)doneButton {
+    doneButton.enabled = NO;
+    NSString *postUrlString = [NSString stringWithFormat:@"/tasks/%d/status", [self.task.objectId intValue]];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:API_URL(postUrlString)
+       parameters:@{ @"status" : @"CLOSED" }
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"ProviderDidCompleteTaskNotification"
+                                                                  object:self
+                                                                userInfo:@{ @"task" : self.task }];
+              [self.navigationController popViewControllerAnimated:YES];
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              doneButton.enabled = YES;
+              HUDWithErrorInView(self.view, @"Could not complete task.");
+              NSLog(@"FAILED TO CHANGE STATUS: %@", error);
+          }];
+
+
 }
 - (IBAction)willViewPatient:(UIButton *)patientNameButton
 {
@@ -88,6 +113,7 @@
 
     //[self.navigationController pushViewController:patientVC animated:YES];
 }
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -182,6 +208,11 @@
     //if we came from the patient view, can only reassign a task that was owned by currently logged in provider
     //if reassigned to the currently logged in provider, i.e. not reassigned at all, don't remove task
     //else pop this view controller and remove task from list
+
+    [self.navigationController popViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ProviderDidReassignTaskNotification"
+                                                        object:self
+                                                      userInfo:@{@"task": task, @"provider":provider}];
 }
 
 @end

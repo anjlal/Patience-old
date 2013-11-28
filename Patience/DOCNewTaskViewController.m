@@ -7,32 +7,83 @@
 //
 
 #import "DOCNewTaskViewController.h"
+#import "DOCPatientsViewController.h"
+#import <AFNetworking/AFNetworking.h>
+#import "DOCPatient.h"
+#import "DOCAccount.h"
+#import "DOCTask.h"
 
-@interface DOCNewTaskViewController ()
+@interface DOCNewTaskViewController () <UITextFieldDelegate, DOCPatientsViewControllerDelegate>
+
+@property (strong, nonatomic) DOCPatient *patient;
+@property (strong, nonatomic) IBOutlet UITextView *description;
+@property (strong, nonatomic) IBOutlet UITextField *patientName;
 
 @end
 
 @implementation DOCNewTaskViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"New Task";
+    self.description.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.description.layer.borderWidth = 1.0f;
+
 	// Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    UIViewController *destinationVC = [segue destinationViewController];
+    if ([destinationVC isKindOfClass:[DOCPatientsViewController class]]) {
+        [(DOCPatientsViewController *)destinationVC setDelegate:self];
+    }
+}
+
+#pragma mark - UIResponder
+
+- (IBAction)willCreateTask:(UIBarButtonItem *)createButton
+{
+    //create task via post and dismiss
+    createButton.enabled = NO;
+    [[AFHTTPRequestOperationManager manager] POST:API_URL(@"/tasks/create")
+                                       parameters:@{
+                                                    @"description": self.description.text,
+                                                    @"patient_id": self.patient.objectId,
+                                                    @"provider_id": [[[DOCAccount account] currentProvider] objectId]
+                                                    }
+                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                              DOCTask *task = [[DOCTask alloc] initWithJson:responseObject[@"task"]];
+                                              [[NSNotificationCenter defaultCenter] postNotificationName:@"ProviderDidCreateTaskNotification"
+                                                                                                  object:self
+                                                                                                userInfo:@{@"task" : task}];
+                                              [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                              createButton.enabled = YES;
+                                              HUDWithErrorInView(self.view, @"Error creating task.");
+                                          }];
+}
+
+- (IBAction)willCancel:(UIBarButtonItem *)cancelButton
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [self performSegueWithIdentifier:@"DOCSelectPatientSegue" sender:self];
+    return NO;
+}
+
+#pragma mark - DOCPatientsViewControllerDelegate
+
+- (void)didSelectPatient:(DOCPatient *)patient
+{
+    self.patient = patient;
+    self.patientName.text = self.patient.name;
 }
 
 @end

@@ -7,21 +7,17 @@
 //
 
 #import "DOCNewPatientViewController.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface DOCNewPatientViewController ()
+
+@property (strong, nonatomic) IBOutlet UIImageView *photo;
+@property (strong, nonatomic) IBOutlet UITextField *name;
+@property (strong, nonatomic) IBOutlet UITextField *phoneNumber;
 
 @end
 
 @implementation DOCNewPatientViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -29,10 +25,22 @@
 	// Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - UIResponder
+
+- (IBAction)willCreatePatient:(UIBarButtonItem *)createButton
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    createButton.enabled = NO;
+//    [[AFHTTPRequestOperationManager manager] POST:@"/patients/create"
+//                                       parameters:<#(NSDictionary *)#>
+//                                          success:<#^(AFHTTPRequestOperation *operation, id responseObject)success#>
+//                                          failure:<#^(AFHTTPRequestOperation *operation, NSError *error)failure#>];
 }
+
+- (IBAction)willCancel:(UIBarButtonItem *)cancelButton
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 @end

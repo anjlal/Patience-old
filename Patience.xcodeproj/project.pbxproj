@@ -34,6 +34,11 @@
 		B388E4B718446947007CE8A2 /* DOCNewPatientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B388E4B618446947007CE8A2 /* DOCNewPatientViewController.m */; };
 		B388E4BA18448D2E007CE8A2 /* DOCSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B388E4B918448D2D007CE8A2 /* DOCSplashViewController.m */; };
 		B388E4BD1844903A007CE8A2 /* DOCAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = B388E4BC1844903A007CE8A2 /* DOCAccount.m */; };
+		B3A5CB041846934D00BABA9E /* homer_simpson.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B3A5CB031846934D00BABA9E /* homer_simpson.jpg */; };
+		B3A5CB061846953100BABA9E /* cookie_monster.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B3A5CB051846953100BABA9E /* cookie_monster.jpg */; };
+		B3A5CB081846953700BABA9E /* big_bird.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B3A5CB071846953700BABA9E /* big_bird.jpg */; };
+		B3A5CB0B1847183E00BABA9E /* DOCNewMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A5CB0A1847183E00BABA9E /* DOCNewMessageViewController.m */; };
+		B3A5CB0E184726E700BABA9E /* DOCPatientsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A5CB0D184726E700BABA9E /* DOCPatientsViewController.m */; };
 		B3A772E318395B960095D0B7 /* DOCProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A772E218395B960095D0B7 /* DOCProvider.m */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +95,13 @@
 		B388E4B918448D2D007CE8A2 /* DOCSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCSplashViewController.m; sourceTree = "<group>"; };
 		B388E4BB1844903A007CE8A2 /* DOCAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOCAccount.h; sourceTree = "<group>"; };
 		B388E4BC1844903A007CE8A2 /* DOCAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCAccount.m; sourceTree = "<group>"; };
+		B3A5CB031846934D00BABA9E /* homer_simpson.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = homer_simpson.jpg; sourceTree = "<group>"; };
+		B3A5CB051846953100BABA9E /* cookie_monster.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cookie_monster.jpg; sourceTree = "<group>"; };
+		B3A5CB071846953700BABA9E /* big_bird.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = big_bird.jpg; sourceTree = "<group>"; };
+		B3A5CB091847183E00BABA9E /* DOCNewMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOCNewMessageViewController.h; sourceTree = "<group>"; };
+		B3A5CB0A1847183E00BABA9E /* DOCNewMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCNewMessageViewController.m; sourceTree = "<group>"; };
+		B3A5CB0C184726E700BABA9E /* DOCPatientsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOCPatientsViewController.h; sourceTree = "<group>"; };
+		B3A5CB0D184726E700BABA9E /* DOCPatientsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCPatientsViewController.m; sourceTree = "<group>"; };
 		B3A772E118395B960095D0B7 /* DOCProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOCProvider.h; sourceTree = "<group>"; };
 		B3A772E218395B960095D0B7 /* DOCProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOCProvider.m; sourceTree = "<group>"; };
 		F15D2BC078D74C398F4FD8F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -165,6 +177,9 @@
 				B354D0751831FF690025B2E2 /* Images.xcassets */,
 				B354D09B183337280025B2E2 /* placeholder.jpg */,
 				B354D0A318358ABC0025B2E2 /* lego.jpg */,
+				B3A5CB051846953100BABA9E /* cookie_monster.jpg */,
+				B3A5CB031846934D00BABA9E /* homer_simpson.jpg */,
+				B3A5CB071846953700BABA9E /* big_bird.jpg */,
 				B354D0641831FF690025B2E2 /* Supporting Files */,
 				B354D092183200050025B2E2 /* DOCTasksViewController.h */,
 				B354D093183200050025B2E2 /* DOCTasksViewController.m */,
@@ -186,6 +201,10 @@
 				B388E4B918448D2D007CE8A2 /* DOCSplashViewController.m */,
 				B388E4BB1844903A007CE8A2 /* DOCAccount.h */,
 				B388E4BC1844903A007CE8A2 /* DOCAccount.m */,
+				B3A5CB091847183E00BABA9E /* DOCNewMessageViewController.h */,
+				B3A5CB0A1847183E00BABA9E /* DOCNewMessageViewController.m */,
+				B3A5CB0C184726E700BABA9E /* DOCPatientsViewController.h */,
+				B3A5CB0D184726E700BABA9E /* DOCPatientsViewController.m */,
 			);
 			path = Patience;
 			sourceTree = "<group>";
@@ -301,7 +320,10 @@
 				B354D0A418358ABC0025B2E2 /* lego.jpg in Resources */,
 				B354D0761831FF690025B2E2 /* Images.xcassets in Resources */,
 				B354D09C183337280025B2E2 /* placeholder.jpg in Resources */,
+				B3A5CB041846934D00BABA9E /* homer_simpson.jpg in Resources */,
 				B354D0681831FF690025B2E2 /* InfoPlist.strings in Resources */,
+				B3A5CB081846953700BABA9E /* big_bird.jpg in Resources */,
+				B3A5CB061846953100BABA9E /* cookie_monster.jpg in Resources */,
 				B354D0711831FF690025B2E2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,7 +379,9 @@
 				B354D0A21835888C0025B2E2 /* DOCProvidersViewController.m in Sources */,
 				B388E4BA18448D2E007CE8A2 /* DOCSplashViewController.m in Sources */,
 				B388E4BD1844903A007CE8A2 /* DOCAccount.m in Sources */,
+				B3A5CB0E184726E700BABA9E /* DOCPatientsViewController.m in Sources */,
 				B388E4B418446935007CE8A2 /* DOCNewTaskViewController.m in Sources */,
+				B3A5CB0B1847183E00BABA9E /* DOCNewMessageViewController.m in Sources */,
 				B354D06A1831FF690025B2E2 /* main.m in Sources */,
 				B354D0A71835B69D0025B2E2 /* DOCPatient.m in Sources */,
 				B354D0AA1835B9340025B2E2 /* DOCBaseModel.m in Sources */,

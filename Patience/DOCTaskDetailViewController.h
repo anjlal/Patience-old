@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DOCTask.h"
 
-@interface DOCTaskDetailViewController : UIViewController <UITextViewDelegate>
+@interface DOCTaskDetailViewController : UIViewController <UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *patientPhoto;
 @property (weak, nonatomic) IBOutlet UILabel *taskID;
 @property (weak, nonatomic) IBOutlet UIButton *patientName;
