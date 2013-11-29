@@ -13,7 +13,7 @@
 #import "DOCAccount.h"
 #import "DOCTask.h"
 
-@interface DOCNewTaskViewController () <UITextFieldDelegate, DOCPatientsViewControllerDelegate>
+@interface DOCNewTaskViewController () <UITextFieldDelegate, UITextViewDelegate, DOCPatientsViewControllerDelegate>
 
 @property (strong, nonatomic) DOCPatient *patient;
 @property (strong, nonatomic) IBOutlet UITextView *description;
@@ -77,6 +77,18 @@
     [self performSegueWithIdentifier:@"DOCSelectPatientSegue" sender:self];
     return NO;
 }
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    NSLog(@"string: %@", text);
+
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
 
 #pragma mark - DOCPatientsViewControllerDelegate
 
